@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Text.Json;
 
 namespace lista_zakupow
@@ -27,7 +27,7 @@ namespace lista_zakupow
             await Navigation.PushAsync(new SkanerQR(Products));
         }
 
-        private void Delete_Button_Clicked(object sender, EventArgs e)
+        private void Delete_Clicked(object sender, EventArgs e)
         {
             Products.Remove((Item)list.SelectedItem);
         }
@@ -57,6 +57,7 @@ namespace lista_zakupow
                 await Navigation.PushAsync(new EditTaskPage(selectedItem, Products));
             }
         }
+
 
     }
 }
