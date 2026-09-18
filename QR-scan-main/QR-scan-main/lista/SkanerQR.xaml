@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="lista_zakupow.SkanerQR"
+             Title="SkanerQR"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls">
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition 
+                 Height=".9*"/>
+                <RowDefinition
+                 Height=".1*"/>
+            </Grid.RowDefinitions>
+            <zxing:CameraBarcodeReaderView
+             x:Name="cameraView"
+             BarcodesDetected="CameraView_BarcodeDetected"
+             IsTorchOn="False"
+             IsDetecting="True"
+             Grid.Row="0"
+                   />
+            <VerticalStackLayout
+             Grid.Row="1">
+                <Label
+                 Text="Wartosc zeskanowana z kodu:"/>
+                <Label
+                 x:Name="codeValue"
+                 Text="Code Value"/>
+                
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

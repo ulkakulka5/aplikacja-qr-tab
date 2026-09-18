@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="lista_zakupow.EditTaskPage"
+             Title="EditTaskPage">
+    <VerticalStackLayout Padding="20" Spacing="15">
+        <Label Text="Edytuj nazwę produktu: " FontSize="Medium" />
+
+        <Entry x:Name="NameEntry" />
+ 
+        <Button Text="Zapisz zmiany" 
+                Clicked="SaveEdit_Clicked" 
+                Style="{StaticResource AddButtonStyle}"/>
+    </VerticalStackLayout>
+</ContentPage>
