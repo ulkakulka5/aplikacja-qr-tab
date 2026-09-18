@@ -12,11 +12,11 @@ public partial class SkanerQR : ContentPage
         _products = products;
     }
 
-    protected override void OnAppearing() // nadpisanie domyœlnej metody OnAppearing która jest wywo³ywana gdy strona staje siê widoczna
+    protected override void OnAppearing() // nadpisanie domyÅ›lnej metody OnAppearing ktÃ³ra jest wywoÅ‚ywana gdy strona staje siÄ™ widoczna
     {
         base.OnAppearing();
 
-        // Konfiguracja formatów
+        // Konfiguracja formatÃ³w
         cameraView.Options = new BarcodeReaderOptions
         {
             Formats = BarcodeFormats.OneDimensional | BarcodeFormats.TwoDimensional,
@@ -28,21 +28,27 @@ public partial class SkanerQR : ContentPage
 
     private void CameraView_BarcodeDetected(object sender, BarcodeDetectionEventArgs e)
     {
-        var result = e?.Results?.FirstOrDefault(); // Jeœli e nie jest null pobierz wynik(kolekcje wyników) i weŸ pierwszy element(FirstOrDefault)
+        var result = e?.Results?.FirstOrDefault(); // JeÅ›li e nie jest null pobierz wynik(kolekcje wynikÃ³w) i weÅº pierwszy element(FirstOrDefault)
         if (result is null)
             return;
-        // Wywo³anie na w¹tku UI i przypisanie do labela, kamera dzia³a na w¹tku t³a i pobranie wyniku z kamery nie mo¿e byæ przypisane do labela, poniewa¿ label dzia³a na w¹tku UI,
-        // w¹tek t³a mo¿e nadal dzia³aæ i wykrywaæ kolejne kody
-        // Podstawowe w¹tki: MainThead - w¹tek UI, Background Thread - w¹tek t³a, w którym dzia³a kamera, 
+        // WywoÅ‚anie na wÄ…tku UI i przypisanie do labela, kamera dziaÅ‚a na wÄ…tku tÅ‚a i pobranie wyniku z kamery nie moÅ¼e byÄ‡ przypisane do labela, poniewaÅ¼ label dziaÅ‚a na wÄ…tku UI,
+        // wÄ…tek tÅ‚a moÅ¼e nadal dziaÅ‚aÄ‡ i wykrywaÄ‡ kolejne kody
+        // Podstawowe wÄ…tki: MainThead - wÄ…tek UI, Background Thread - wÄ…tek tÅ‚a, w ktÃ³rym dziaÅ‚a kamera, 
         MainThread.BeginInvokeOnMainThread(async() =>
         {
-            codeValue.Text = result.Value;
-            if (!string.IsNullOrWhiteSpace(codeValue.Text))
-            {
-                _products.Add(new Item { Name = codeValue.Text, Number = 1 });
+           
+           // if (!string.IsNullOrWhiteSpace(codeValue.Text))
+           // {
+            //    _products.Add(new Item { Name = codeValue.Text, Number = 1 });
 
-                await Navigation.PopAsync();
-            }
+            //    await Navigation.PopAsync();
+           // }
         });
+    }
+    
+
+    async private void Powrot_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new MainPage());
     }
 }
