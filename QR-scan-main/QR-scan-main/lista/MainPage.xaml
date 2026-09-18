@@ -1,7 +1,8 @@
-﻿
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="lista_zakupow.MainPage">
+             x:Class="lista_zakupow.MainPage"
+             BackgroundColor="#66717E">
 
     <Grid Margin="5">
         <Grid.RowDefinitions>
@@ -14,77 +15,167 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Button Text="Add task"
-                x:Name="AddButton"
-                Grid.Row="0"
-                Grid.Column="0"
-                Grid.ColumnSpan="1"
-                MaximumHeightRequest="50"
-                Clicked="AddButton_Clicked"
-                Style="{StaticResource AddButtonStyle}"
-                ></Button>
-        <Button Text="Add task by QR"
-            x:Name="AddQR"
-            Grid.Row="0"
-            Grid.Column="1"
-            Grid.ColumnSpan="1"
-            MaximumHeightRequest="50"
-            Clicked="AddQR_Clicked" 
-            Style="{StaticResource AddButtonStyle}"
-            ></Button>
-        <Button Text="Delete tasks"
-            Grid.Row="0"
-            Grid.Column="2"
-            Grid.ColumnSpan="1"
-            MaximumHeightRequest="50"
-            Clicked="Delete_Button_Clicked"
-            Style="{StaticResource DeleteButtonStyle}"></Button>
-        <CollectionView ItemsSource="{Binding Products}"
-                        x:Name="list"
-                        Grid.Row="1"
-                        Grid.ColumnSpan="3"
-                        SelectionMode="Single"
-                        Style="{StaticResource listStyle}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <VerticalStackLayout>
-                        <Label Text="{Binding Name}" 
-                           TextColor="DarkRed"
-                          
-                    ></Label>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup Name="CommonStates">
-                                <VisualState Name="Normal"></VisualState>
-                                <VisualState Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="#e6be8f" ></Setter>
-                                    </VisualState.Setters>
-                                </VisualState>
 
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                    </VerticalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <Button Text="Save tasks"
-        Grid.Row="2"
-        Grid.Column="1"
-        MaximumHeightRequest="50"
-        Clicked="SaveButton_Clicked"
-        Style="{StaticResource AddButtonStyle}"></Button>
-        <Button Text="Edit tasks"
-                Grid.Row="2"
-                Grid.Column="0"
-                x:Name="EditButton"
-                MaximumHeightRequest="50"
-                Clicked="EditButton_Clicked"
-                Style="{StaticResource AddButtonStyle}"></Button>
-        <Button Text="Load tasks"
-                Grid.Row="2"
-                Grid.Column="2"
-                MaximumHeightRequest="50"
-                Clicked="LoadButton_Clicked"
-                Style="{StaticResource AddButtonStyle}"></Button>
+        <VerticalStackLayout
+    Grid.Row="0"
+    Grid.Column="3"
+    Grid.ColumnSpan="1"
+    Grid.RowSpan="3"
+    Margin="0,110,0,0">
+
+            <Button
+        Text="Usuń"
+        x:Name="Delete"
+        Clicked="Delete_Clicked"
+        WidthRequest="180"
+        HeightRequest="40"
+        BackgroundColor="#383B53"
+        TextColor="#D4D6B9"
+        FontSize="16"
+        CornerRadius="10"
+        BorderWidth="0"
+        Padding="0"
+        Margin="30">
+
+                <Button.Shadow>
+                    <Shadow
+                Brush="#000000"
+                Offset="4,5"
+                Radius="10"
+                Opacity="0.30" />
+                </Button.Shadow>
+
+            </Button>
+
+            <Button
+        Text="Zeskanuj nowy kod"
+        x:Name="AddQR"
+        Clicked="AddQR_Clicked"
+        WidthRequest="180"
+        HeightRequest="40"
+        BackgroundColor="#383B53"
+        TextColor="#D4D6B9"
+        FontSize="16"
+        CornerRadius="10"
+        BorderWidth="0"
+        Padding="0"
+        Margin="30">
+
+                <Button.Shadow>
+                    <Shadow
+                Brush="#000000"
+                Offset="4,5"
+                Radius="10"
+                Opacity="0.30" />
+                </Button.Shadow>
+
+            </Button>
+
+            <Button
+        Text="Edytuj"
+        x:Name="EditButton"
+        Clicked="EditButton_Clicked"
+        WidthRequest="180"
+        HeightRequest="40"
+        BackgroundColor="#383B53"
+        TextColor="#D4D6B9"
+        FontSize="16"
+        CornerRadius="10"
+        BorderWidth="0"
+        Padding="0"
+        Margin="30">
+
+                <Button.Shadow>
+                    <Shadow
+                Brush="#000000"
+                Offset="4,5"
+                Radius="10"
+                Opacity="0.30" />
+                </Button.Shadow>
+
+            </Button>
+
+            <Button
+        Text="Edycja bazy danych"
+        WidthRequest="180"
+        HeightRequest="40"
+        BackgroundColor="#383B53"
+        TextColor="#D4D6B9"
+        FontSize="16"
+        CornerRadius="10"
+        BorderWidth="0"
+        Padding="0"
+        Margin="30">
+
+                <Button.Shadow>
+                    <Shadow
+                Brush="#000000"
+                Offset="4,5"
+                Radius="10"
+                Opacity="0.30" />
+                </Button.Shadow>
+
+            </Button>
+
+        </VerticalStackLayout>
+
+
+
+        <Border StrokeShape="RoundRectangle 20" BackgroundColor="#D9D9D9"
+          Grid.Row="1"
+          Grid.Column="0"
+          Grid.ColumnSpan="2"
+          WidthRequest="900"
+          Margin="45,0,0,0">
+            <CollectionView
+        x:Name="list"
+      
+        ItemsSource="{Binding Products}"
+        SelectionMode="Single"
+        Style="{StaticResource listStyle}"
+                BackgroundColor="#D9D9D9">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                    x:Name="itemBorder"
+                    Padding="10"
+                    BackgroundColor="Transparent">
+
+                            <Label
+                        Text="{Binding Name}"
+                        TextColor="DarkRed" />
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter
+                                        TargetName="itemBorder"
+                                        Property="BackgroundColor"
+                                        Value="Transparent" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter
+                                        TargetName="itemBorder"
+                                        Property="BackgroundColor"
+                                        Value="#e6be8f" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Border>
+
+
+       
+        
     </Grid>
 </ContentPage>
