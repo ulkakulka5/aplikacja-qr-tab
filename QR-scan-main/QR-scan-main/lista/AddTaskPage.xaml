@@ -1,56 +1,231 @@
-<?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="lista_zakupow.AddTaskPage"
-             Title="AddTaskPage">
-    <VerticalStackLayout>
-        <ListView
-        x:Name="listaKlasa"
+             BackgroundColor="#66717E">
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <VerticalStackLayout VerticalOptions="Center"
+    Grid.Row="0"
+    Grid.Column="3"
+    Grid.ColumnSpan="1"
+    Grid.RowSpan="3"
+    Margin="0,0,0,0">
+            <Label Text="Imię:" FontSize="20" Margin="130,0,0,10"></Label>
+            <Border
+WidthRequest="200"
+HeightRequest="40"
+BackgroundColor="#D4D6B9"
+StrokeThickness="0"
+StrokeShape="RoundRectangle 10"
+Padding="10,0">
+
+                <Border.Shadow>
+                    <Shadow
+        Brush="#000000"
+        Offset="4,5"
+        Radius="10"
+        Opacity="0.30" />
+                </Border.Shadow>
+
+                <Entry
+    x:Name="Imie"
+    BackgroundColor="Transparent"
+    TextColor="#1E1E1E"
+    FontSize="16"
+    Placeholder="..."
+    PlaceholderColor="#777777"
+    Margin="0"
+    VerticalOptions="Center" />
+
+            </Border>
+
+            <Label Text="Nazwisko:" FontSize="20" Margin="130,40,0,10"></Label>
+            <Border
+WidthRequest="200"
+HeightRequest="40"
+BackgroundColor="#D4D6B9"
+StrokeThickness="0"
+StrokeShape="RoundRectangle 10"
+Padding="10,0">
+
+                <Border.Shadow>
+                    <Shadow
+        Brush="#000000"
+        Offset="4,5"
+        Radius="10"
+        Opacity="0.30" />
+                </Border.Shadow>
+
+                <Entry
+    x:Name="Nazwisko"
+    BackgroundColor="Transparent"
+    TextColor="#1E1E1E"
+    FontSize="16"
+    Placeholder="..."
+    PlaceholderColor="#777777"
+    Margin="0"
+    VerticalOptions="Center" />
+
+            </Border>
+
+            <Label Text="Klasa:" FontSize="20" Margin="130,40,0,10"></Label>
+            <Border
+WidthRequest="200"
+HeightRequest="40"
+BackgroundColor="#D4D6B9"
+StrokeThickness="0"
+StrokeShape="RoundRectangle 10"
+Padding="10,0">
+
+                <Border.Shadow>
+                    <Shadow
+        Brush="#000000"
+        Offset="4,5"
+        Radius="10"
+        Opacity="0.30" />
+                </Border.Shadow>
+
+                <Entry
+    x:Name="Klasa"
+    BackgroundColor="Transparent"
+    TextColor="#1E1E1E"
+    FontSize="16"
+    Placeholder="..."
+    PlaceholderColor="#777777"
+    Margin="0"
+    VerticalOptions="Center" />
+
+            </Border>
+
+            <Button
+    Text="Powrót do strony głównej"
+    WidthRequest="300"
+    HeightRequest="40"
+    BackgroundColor="#383B53"
+    TextColor="#D4D6B9"
+    FontSize="16"
+    CornerRadius="10"
+    BorderWidth="0"
+    Padding="0"
+    Margin="0,80,0,0"
+    Clicked="Button_Clicked">
+
+                <Button.Shadow>
+                    <Shadow
+            Brush="#000000"
+            Offset="4,5"
+            Radius="10"
+            Opacity="0.30" />
+                </Button.Shadow>
+
+            </Button>
+
+        </VerticalStackLayout>
+
+
+        <Border
+    StrokeShape="RoundRectangle 20"
+    BackgroundColor="#D9D9D9"
+    Grid.Row="1"
+    Grid.Column="0"
+    Grid.ColumnSpan="2"
+    Margin="45,0,0,0">
+
+            <CollectionView
+        x:Name="list"
+        ItemsSource="{Binding Products}"
         SelectionMode="Single"
-        ItemSelected="listaKlasa_ItemSelected">
+        Style="{StaticResource listStyle}"
+        BackgroundColor="#D9D9D9">
 
-            <ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>2TP</x:String>
-                    <x:String>3TP</x:String>
-                    <x:String>4TP</x:String>
-                    <x:String>5TP</x:String>
-                </x:Array>
-            </ListView.ItemsSource>
 
-        </ListView>
-        <ListView
-            x:Name="listaGrupa"
-            SelectionMode="Single"
-            ItemSelected="listaGrupa_ItemSelected">
 
-            <ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>1</x:String>
-                    <x:String>2</x:String>
-                </x:Array>
-            </ListView.ItemsSource>
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="*,*,*">
+                        <Label
+                            Grid.Column="0"
+                            Text="Numer urządzenia"
+                            TextColor="Black"
+                            FontSize="20"
+                            Margin="20,10,0,10" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Imię, nazwisko, klasa"
+                            TextColor="Black"
+                            FontSize="20"
+                            Margin="20,10,0,10" />
+                        <Label
+                            Grid.Column="2"
+                            Text="Data"
+                            TextColor="Black"
+                            FontSize="20"
+                            Margin="20,10,0,10" />
+                    </Grid>
+                </CollectionView.Header>
 
-        </ListView>
-        <ListView
-            x:Name="listaUczen"
-            SelectionMode="Single"
-            ItemSelected="listaUczen_ItemSelected">
 
-            <ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Zofia Sadowska</x:String>
-                    <x:String>Urszula Zachara</x:String>
-                </x:Array>
-            </ListView.ItemsSource>
 
-        </ListView>
-        <Button Grid.Column="2"
-            Margin="5"
-            MaximumHeightRequest="60"
-            Text="Add Task"
-            x:Name="AddButton"
-            Clicked="AddButton_Clicked"
-            Style="{StaticResource AddButtonStyle}"/>
-    </VerticalStackLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Border
+                            x:Name="itemBorder"
+                            Padding="10"
+                            BackgroundColor="Transparent">
+
+                            <Label
+                                Text="{Binding Name}"
+                                TextColor="Black" />
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </Border>
+        <Line
+    Grid.Row="0"
+    Grid.Column="0"
+    Grid.RowSpan="3"
+    Grid.ColumnSpan="3"
+    X1="300"
+    Y1="130"
+    X2="300"
+    Y2="540"
+    Stroke="#AEAEAE"
+    StrokeThickness="3"
+    
+     />
+
+      <Line
+Grid.Row="0"
+Grid.Column="0"
+Grid.RowSpan="3"
+Grid.ColumnSpan="3"
+X1="600"
+Y1="130"
+X2="600"
+Y2="540"
+Stroke="#AEAEAE"
+StrokeThickness="3"
+
+ />
+
+
+
+
+    </Grid>
 </ContentPage>
