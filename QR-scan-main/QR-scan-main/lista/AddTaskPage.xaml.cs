@@ -1,27 +1,73 @@
-using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
 
 namespace lista_zakupow;
 
 public partial class AddTaskPage : ContentPage
 {
-    public ObservableCollection<Item> _products;
+    public ObservableCollection<Item> _Tablety;
 
-    public AddTaskPage(ObservableCollection<Item> products)
+    private string wybranaKlasa;
+    private string wybranaGrupa;
+    private string wybranyUczen;
+
+    public AddTaskPage(ObservableCollection<Item> Tablety)
     {
         InitializeComponent();
-        _products = products;
+
+        _Tablety = Tablety;
+    }
+
+    private void listaKlasa_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        if (e.SelectedItem == null)
+            return;
+
+        wybranaKlasa = e.SelectedItem.ToString();
+
+        
+        ((ListView)sender).SelectedItem = null;
+    }
+
+    private void listaGrupa_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        if (e.SelectedItem == null)
+            return;
+
+        wybranaGrupa = e.SelectedItem.ToString();
+
+        
+        ((ListView)sender).SelectedItem = null;
+    }
+
+    private void listaUczen_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        if (e.SelectedItem == null)
+            return;
+
+        wybranyUczen = e.SelectedItem.ToString();
+
+        
+        ((ListView)sender).SelectedItem = null;
     }
 
     private async void AddButton_Clicked(object sender, EventArgs e)
     {
-        
-        if (!string.IsNullOrWhiteSpace(addItem.Text))
+        if (string.IsNullOrEmpty(wybranyUczen) ||
+            string.IsNullOrEmpty(wybranaKlasa))
         {
-            _products.Add(new Item { Name = addItem.Text, Number = 1 });
+            await DisplayAlert(
+                "B³¹d",
+                "Wybierz ucznia oraz klasê.",
+                "OK");
 
-            await Navigation.PopAsync();
+            return;
         }
+
+        _Tablety.Add(new Item
+        {
+            ImieNazwiskoKLasa = wybranyUczen + ", " + wybranaKlasa
+        });
+
+        
     }
 }
-

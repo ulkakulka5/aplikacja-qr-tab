@@ -37,18 +37,18 @@ public partial class SkanerQR : ContentPage
         MainThread.BeginInvokeOnMainThread(async() =>
         {
            
-           // if (!string.IsNullOrWhiteSpace(codeValue.Text))
-           // {
-            //    _products.Add(new Item { Name = codeValue.Text, Number = 1 });
+          if (!string.IsNullOrWhiteSpace(result.Value))
+            {
+               _products.Add(new Item { NumerUrzadzenia = result.Value, Data = DateTime.Now});
 
-            //    await Navigation.PopAsync();
-           // }
+                await Navigation.PushAsync(new AddTaskPage(_products));
+            }
         });
     }
     
 
     async private void Powrot_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new MainPage());
+        await Navigation.PopAsync();
     }
 }

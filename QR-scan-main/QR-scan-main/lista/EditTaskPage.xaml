@@ -8,8 +8,8 @@
 
         <Entry x:Name="NameEntry" />
  
-        <Button Text="Zapisz zmiany" 
+        <!--<Button Text="Zapisz zmiany" 
                 Clicked="SaveEdit_Clicked" 
-                Style="{StaticResource AddButtonStyle}"/>
+                Style="{StaticResource AddButtonStyle}"/>-->
     </VerticalStackLayout>
 </ContentPage>

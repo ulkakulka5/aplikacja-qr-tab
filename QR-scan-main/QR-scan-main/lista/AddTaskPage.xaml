@@ -4,9 +4,47 @@
              x:Class="lista_zakupow.AddTaskPage"
              Title="AddTaskPage">
     <VerticalStackLayout>
-        <Entry Grid.Column="0" 
-           Grid.ColumnSpan="2"
-           x:Name="addItem"/>
+        <ListView
+        x:Name="listaKlasa"
+        SelectionMode="Single"
+        ItemSelected="listaKlasa_ItemSelected">
+
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>2TP</x:String>
+                    <x:String>3TP</x:String>
+                    <x:String>4TP</x:String>
+                    <x:String>5TP</x:String>
+                </x:Array>
+            </ListView.ItemsSource>
+
+        </ListView>
+        <ListView
+            x:Name="listaGrupa"
+            SelectionMode="Single"
+            ItemSelected="listaGrupa_ItemSelected">
+
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>1</x:String>
+                    <x:String>2</x:String>
+                </x:Array>
+            </ListView.ItemsSource>
+
+        </ListView>
+        <ListView
+            x:Name="listaUczen"
+            SelectionMode="Single"
+            ItemSelected="listaUczen_ItemSelected">
+
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Zofia Sadowska</x:String>
+                    <x:String>Urszula Zachara</x:String>
+                </x:Array>
+            </ListView.ItemsSource>
+
+        </ListView>
         <Button Grid.Column="2"
             Margin="5"
             MaximumHeightRequest="60"

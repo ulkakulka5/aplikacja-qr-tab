@@ -3,11 +3,11 @@ using System.Collections.ObjectModel;
 namespace lista_zakupow;
 
 public partial class EditTaskPage : ContentPage
-{
+{ 
     private Item _itemToEdit;
-    private ObservableCollection<Item> _products;
+    private ObservableCollection<Item> _Tablety;
 
-    public EditTaskPage(Item itemToEdit, ObservableCollection<Item> products)
+    /*public EditTaskPage(Item itemToEdit, ObservableCollection<Item> products)
     {
         InitializeComponent();
         _itemToEdit = itemToEdit;
@@ -26,5 +26,5 @@ public partial class EditTaskPage : ContentPage
             _products[index] = _itemToEdit;
         }
         await Navigation.PopAsync();
-    }
+    }*/
 }

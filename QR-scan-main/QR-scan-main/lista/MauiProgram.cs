@@ -19,6 +19,7 @@ namespace lista_zakupow
 
 #if DEBUG
     		builder.Logging.AddDebug();
+            builder.Services.AddSingleton<DatabaseService>();
 #endif
 
             return builder.Build();

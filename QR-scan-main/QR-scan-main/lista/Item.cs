@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,12 @@ namespace lista_zakupow
 {
     public class Item
     {
-        public string? Name { get; set; }
-        public int? Number { get; set;  }
+        [PrimaryKey]
+        [AutoIncrement]
+        public int Id { get; set; }
+        public string NumerUrzadzenia { get; set; }
+        public string ImieNazwiskoKLasa { get; set; }
+        public DateTime Data { get; set; }
+
     }
 }
