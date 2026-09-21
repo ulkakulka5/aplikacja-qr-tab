@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="lista_zakupow.EditTaskPage"
              Title="EditTaskPage">
-    <VerticalStackLayout Padding="20" Spacing="15">
-        <Label Text="Edytuj nazwę produktu: " FontSize="Medium" />
-
-        <Entry x:Name="NameEntry" />
- 
-        <!--<Button Text="Zapisz zmiany" 
-                Clicked="SaveEdit_Clicked" 
-                Style="{StaticResource AddButtonStyle}"/>-->
+    <VerticalStackLayout Spacing="5"
+                         Margin="5">
+        <Label Text="Numer Urzadzenia:" />
+        <Entry x:Name="TytulEntry" />
+        <Label Text="Imie, Nazwisko, Klasa:" />
+        <Entry x:Name="RezyserEntry" />
+        <Label Text="Data:" />
+        <Entry x:Name="RokProdukcjiEntry" />
+        <Button Text="Edytuj film" Clicked="OnEdytujFilmClicked" />
     </VerticalStackLayout>
 </ContentPage>

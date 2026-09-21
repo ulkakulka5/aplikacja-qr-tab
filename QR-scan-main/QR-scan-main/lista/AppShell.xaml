@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:lista_zakupow"
     Title="lista_zakupow"
+    FlyoutBehavior="Disabled"
     >
 
 

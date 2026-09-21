@@ -3,28 +3,42 @@ using System.Collections.ObjectModel;
 namespace lista_zakupow;
 
 public partial class EditTaskPage : ContentPage
-{ 
-    private Item _itemToEdit;
-    private ObservableCollection<Item> _Tablety;
-
-    /*public EditTaskPage(Item itemToEdit, ObservableCollection<Item> products)
+{
+    private readonly DatabaseService _databaseService;
+    private Item _pobranyTablet;
+    private int _TabletId;
+    public EdytujFilm(DatabaseService databaseService, int filmId)
     {
         InitializeComponent();
-        _itemToEdit = itemToEdit;
-        _products = products;
+        _databaseService = databaseService;
+        _TabletId = filmId;
 
-        NameEntry.Text = _itemToEdit.Name;
+    }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        _pobranyTablet = await _databaseService.PobierzFilmPoID(_TabletId);
+
+        if (_pobranyTablet == null)
+            return;
+
+        TytulEntry.Text = _pobranyTablet.NumerUrzadzenia;
+        RezyserEntry.Text = _pobranyTablet.ImieNazwiskoKLasa;
+        RokProdukcjiEntry.Text = _pobranyTablet.Data.ToString();
+
     }
 
-    private async void SaveEdit_Clicked(object sender, EventArgs e)
+    private async void OnEdytujFilmClicked(object sender, EventArgs e)
     {
-        int index = _products.IndexOf(_itemToEdit);
-
-        if (index != -1)
+        var tablet = new Item
         {
-            _itemToEdit.Name = NameEntry.Text;
-            _products[index] = _itemToEdit;
-        }
-        await Navigation.PopAsync();
-    }*/
+            Id = _TabletId,
+            NumerUrzadzenia = TytulEntry.Text,
+            ImieNazwiskoKLasa = RezyserEntry.Text,
+            Data = DateTime.Parse(RokProdukcjiEntry.Text)
+        };
+        await _databaseService.AktualizujFilmAsync(tablet);
+
+    }
 }

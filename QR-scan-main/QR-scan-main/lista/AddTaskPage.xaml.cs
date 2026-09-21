@@ -4,70 +4,24 @@ namespace lista_zakupow;
 
 public partial class AddTaskPage : ContentPage
 {
-    public ObservableCollection<Item> _Tablety;
+    private readonly DatabaseService _databaseService;
 
-    private string wybranaKlasa;
-    private string wybranaGrupa;
-    private string wybranyUczen;
-
-    public AddTaskPage(ObservableCollection<Item> Tablety)
+    public DodajFilm(DatabaseService databaseService)
     {
         InitializeComponent();
 
-        _Tablety = Tablety;
+        _databaseService = databaseService;
     }
 
-    private void listaKlasa_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private async void OnDodajFilmClicked(object sender, EventArgs e)
     {
-        if (e.SelectedItem == null)
-            return;
-
-        wybranaKlasa = e.SelectedItem.ToString();
-
-        
-        ((ListView)sender).SelectedItem = null;
-    }
-
-    private void listaGrupa_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-    {
-        if (e.SelectedItem == null)
-            return;
-
-        wybranaGrupa = e.SelectedItem.ToString();
-
-        
-        ((ListView)sender).SelectedItem = null;
-    }
-
-    private void listaUczen_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-    {
-        if (e.SelectedItem == null)
-            return;
-
-        wybranyUczen = e.SelectedItem.ToString();
-
-        
-        ((ListView)sender).SelectedItem = null;
-    }
-
-    private async void AddButton_Clicked(object sender, EventArgs e)
-    {
-        if (string.IsNullOrEmpty(wybranyUczen) ||
-            string.IsNullOrEmpty(wybranaKlasa))
+        var film = new Film
         {
-            await DisplayAlert(
-                "B³¹d",
-                "Wybierz ucznia oraz klasê.",
-                "OK");
-
-            return;
-        }
-
-        _Tablety.Add(new Item
-        {
-            ImieNazwiskoKLasa = wybranyUczen + ", " + wybranaKlasa
-        });
-
-        
+            Tytul = TytulEntry.Text,
+            Rezyser = RezyserEntry.Text,
+            RokProdukcji = int.Parse(RokProdukcjiEntry.Text),
+            Ocena = int.Parse(OcenaEntry.Text)
+        };
+        await _databaseService.DodajFilmAsync(film);
     }
 }
