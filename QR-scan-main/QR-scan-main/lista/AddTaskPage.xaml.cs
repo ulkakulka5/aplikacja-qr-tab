@@ -5,23 +5,26 @@ namespace lista_zakupow;
 public partial class AddTaskPage : ContentPage
 {
     private readonly DatabaseService _databaseService;
+    public ObservableCollection<Item> Products { get; }
 
-    public AddTaskPage(DatabaseService databaseService)
+    public AddTaskPage(ObservableCollection<Item> products, DatabaseService databaseService)
     {
         InitializeComponent();
-
+        Products = products;
         _databaseService = databaseService;
+        BindingContext = this;
     }
 
-    private async void OnDodajFilmClicked(object sender, EventArgs e)
+    private async void Button_Clicked(object sender, EventArgs e)
     {
-        var film = new Item
+ 
+        if (Products.Count > 0)
         {
-            NumerUrzadzenia = TytulEntr.Text,
-            Rezyser = RezyserEntry.Text,
-            RokProdukcji = int.Parse(RokProdukcjiEntry.Text),
-            Ocena = int.Parse(OcenaEntry.Text)
-        };
-        await _databaseService.DodajFilmAsync(film);
+            var item = Products[^1];
+            item.ImieNazwiskoKLasa = $"{Imie.Text} {Nazwisko.Text} {Klasa.Text}".Trim();
+            await _databaseService.DodajFilmAsync(item);
+        }
+
+        await Navigation.PopToRootAsync();
     }
 }

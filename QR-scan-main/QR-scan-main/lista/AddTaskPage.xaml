@@ -18,7 +18,7 @@
 
         <VerticalStackLayout VerticalOptions="Center"
     Grid.Row="0"
-    Grid.Column="3"
+    Grid.Column="2"
     Grid.ColumnSpan="1"
     Grid.RowSpan="3"
     Margin="0,0,0,0">
@@ -180,15 +180,20 @@ Padding="10,0">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
 
-                        <Border
-                            x:Name="itemBorder"
-                            Padding="10"
-                            BackgroundColor="Transparent">
-
+                        <Grid ColumnDefinitions="*,*,*" Padding="10">
                             <Label
-                                Text="{Binding Name}"
+                                Grid.Column="0"
+                                Text="{Binding NumerUrzadzenia}"
                                 TextColor="Black" />
-                        </Border>
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding ImieNazwiskoKLasa}"
+                                TextColor="Black" />
+                            <Label
+                                Grid.Column="2"
+                                Text="{Binding Data, StringFormat='{0:g}'}"
+                                TextColor="Black" />
+                        </Grid>
 
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

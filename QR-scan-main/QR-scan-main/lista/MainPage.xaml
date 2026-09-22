@@ -18,7 +18,7 @@
 
         <VerticalStackLayout
     Grid.Row="0"
-    Grid.Column="3"
+    Grid.Column="2"
     Grid.ColumnSpan="1"
     Grid.RowSpan="3"
     Margin="0,110,0,0">
@@ -95,28 +95,6 @@
 
             </Button>
 
-            <Button
-        Text="Edycja bazy danych"
-        WidthRequest="180"
-        HeightRequest="40"
-        BackgroundColor="#383B53"
-        TextColor="#D4D6B9"
-        FontSize="16"
-        CornerRadius="10"
-        BorderWidth="0"
-        Padding="0"
-        Margin="30">
-
-                <Button.Shadow>
-                    <Shadow
-                Brush="#000000"
-                Offset="4,5"
-                Radius="10"
-                Opacity="0.30" />
-                </Button.Shadow>
-
-            </Button>
-
         </VerticalStackLayout>
 
 
@@ -166,15 +144,20 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
 
-                        <Border
-                            x:Name="itemBorder"
-                            Padding="10"
-                            BackgroundColor="Transparent">
-                            
+                        <Grid ColumnDefinitions="*,*,*" Padding="10">
                             <Label
-                                Text="{Binding Name}"
+                                Grid.Column="0"
+                                Text="{Binding NumerUrzadzenia}"
                                 TextColor="Black" />
-                        </Border>
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding ImieNazwiskoKLasa}"
+                                TextColor="Black" />
+                            <Label
+                                Grid.Column="2"
+                                Text="{Binding Data, StringFormat='{0:g}'}"
+                                TextColor="Black" />
+                        </Grid>
 
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

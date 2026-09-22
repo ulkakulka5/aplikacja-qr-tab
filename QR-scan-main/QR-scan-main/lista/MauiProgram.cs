@@ -17,9 +17,11 @@ namespace lista_zakupow
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            // Moved out of #if DEBUG: MainPage needs DatabaseService injected in Release builds too.
+            builder.Services.AddSingleton<DatabaseService>();
+
 #if DEBUG
     		builder.Logging.AddDebug();
-            builder.Services.AddSingleton<DatabaseService>();
 #endif
 
             return builder.Build();

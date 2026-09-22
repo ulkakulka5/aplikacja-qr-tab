@@ -5,11 +5,14 @@ namespace lista_zakupow;
 
 public partial class SkanerQR : ContentPage
 {
-    public ObservableCollection<Item> _products;
-    public SkanerQR(ObservableCollection<Item> products)
+    private readonly ObservableCollection<Item> _products;
+    private readonly DatabaseService _databaseService;
+
+    public SkanerQR(ObservableCollection<Item> products, DatabaseService databaseService)
 	{
 		InitializeComponent();
         _products = products;
+        _databaseService = databaseService;
     }
 
     protected override void OnAppearing() // nadpisanie domyślnej metody OnAppearing która jest wywoływana gdy strona staje się widoczna
@@ -41,7 +44,7 @@ public partial class SkanerQR : ContentPage
             {
                _products.Add(new Item { NumerUrzadzenia = result.Value, Data = DateTime.Now});
 
-                await Navigation.PushAsync(new AddTaskPage(_products));
+                await Navigation.PushAsync(new AddTaskPage(_products, _databaseService));
             }
         });
     }

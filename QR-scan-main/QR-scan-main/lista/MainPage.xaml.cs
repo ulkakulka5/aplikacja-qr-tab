@@ -1,55 +1,48 @@
 using System.Collections.ObjectModel;
-using System.Text.Json;
 
 namespace lista_zakupow
 {
     public partial class MainPage : ContentPage
     {
-        public ObservableCollection<Item> Tablety { get; set; }
+        public ObservableCollection<Item> Products { get; set; } = new();
         private readonly DatabaseService _databaseService;
-        private Item _wybranyTablet;
+
         public MainPage(DatabaseService databaseService)
         {
             InitializeComponent();
-            Tablety = new ObservableCollection<Item>();
             _databaseService = databaseService;
-            Tablety = new ObservableCollection<Item>();
             BindingContext = this;
-
         }
 
-
-        private async void AddButton_Clicked(object sender, EventArgs e)
+        protected override async void OnAppearing()
         {
+            base.OnAppearing();
 
-            await Navigation.PushAsync(new AddTaskPage(Tablety));
+            Products.Clear();
+            foreach (var item in await _databaseService.PobierzFilmyAsync())
+                Products.Add(item);
         }
 
         private async void AddQR_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SkanerQR(Tablety));
+            await Navigation.PushAsync(new SkanerQR(Products, _databaseService));
         }
 
-        private void Delete_Clicked(object sender, EventArgs e)
+        private async void Delete_Clicked(object sender, EventArgs e)
         {
-            Tablety.Remove((Item)list.SelectedItem);
+            if (list.SelectedItem is Item selected)
+            {
+                await _databaseService.UsunFilmAsync(selected);
+                Products.Remove(selected);
+            }
         }
-
-       
-
-        
-
 
         private async void EditButton_Clicked(object sender, EventArgs e)
         {
-
-            /*if (list.SelectedItem is Item selectedItem)
+            if (list.SelectedItem is Item selectedItem)
             {
-
-                await Navigation.PushAsync(new EditTaskPage(selectedItem, Tablety));
-            }*/
+                await Navigation.PushAsync(new EditTaskPage(selectedItem, Products, _databaseService));
+            }
         }
-
-
     }
 }

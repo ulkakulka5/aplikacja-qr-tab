@@ -5,40 +5,34 @@ namespace lista_zakupow;
 public partial class EditTaskPage : ContentPage
 {
     private readonly DatabaseService _databaseService;
-    private Item _pobranyTablet;
-    private int _TabletId;
-    public EditTaskPage(DatabaseService databaseService, int filmId)
+    private readonly Item _item;
+    public ObservableCollection<Item> Products { get; }
+
+    public EditTaskPage(Item item, ObservableCollection<Item> products, DatabaseService databaseService)
     {
         InitializeComponent();
+        _item = item;
+        Products = products;
         _databaseService = databaseService;
-        _TabletId = filmId;
-
+        BindingContext = this;
     }
-    protected override async void OnAppearing()
+
+    protected override void OnAppearing()
     {
         base.OnAppearing();
 
-        _pobranyTablet = await _databaseService.PobierzFilmPoID(_TabletId);
+        var parts = (_item.ImieNazwiskoKLasa ?? string.Empty)
+            .Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-        if (_pobranyTablet == null)
-            return;
-
-        TytulEntry.Text = _pobranyTablet.NumerUrzadzenia;
-        RezyserEntry.Text = _pobranyTablet.ImieNazwiskoKLasa;
-        RokProdukcjiEntry.Text = _pobranyTablet.Data.ToString();
-
+        Imie.Text = parts.Length > 0 ? parts[0] : string.Empty;
+        Nazwisko.Text = parts.Length > 1 ? parts[1] : string.Empty;
+        Klasa.Text = parts.Length > 2 ? parts[2] : string.Empty;
     }
 
-    private async void OnEdytujFilmClicked(object sender, EventArgs e)
+    private async void Button_Clicked(object sender, EventArgs e)
     {
-        var tablet = new Item
-        {
-            Id = _TabletId,
-            NumerUrzadzenia = TytulEntry.Text,
-            ImieNazwiskoKLasa = RezyserEntry.Text,
-            Data = DateTime.Parse(RokProdukcjiEntry.Text)
-        };
-        await _databaseService.AktualizujFilmAsync(tablet);
-
+        _item.ImieNazwiskoKLasa = $"{Imie.Text} {Nazwisko.Text} {Klasa.Text}".Trim();
+        await _databaseService.AktualizujFilmAsync(_item);
+        await Navigation.PopAsync();
     }
 }
