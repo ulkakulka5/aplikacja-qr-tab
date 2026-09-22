@@ -7,7 +7,7 @@ public partial class EditTaskPage : ContentPage
     private readonly DatabaseService _databaseService;
     private Item _pobranyTablet;
     private int _TabletId;
-    public EdytujFilm(DatabaseService databaseService, int filmId)
+    public EditTaskPage(DatabaseService databaseService, int filmId)
     {
         InitializeComponent();
         _databaseService = databaseService;
