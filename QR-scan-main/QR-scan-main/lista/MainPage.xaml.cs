@@ -34,6 +34,7 @@ namespace lista_zakupow
             {
                 await _databaseService.UsunFilmAsync(selected);
                 Products.Remove(selected);
+                list.SelectedItem = null; 
             }
         }
 
@@ -43,6 +44,7 @@ namespace lista_zakupow
             {
                 await Navigation.PushAsync(new EditTaskPage(selectedItem, Products, _databaseService));
             }
+            
         }
     }
 }
