@@ -31,6 +31,13 @@ public partial class EditTaskPage : ContentPage
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
+        if (string.IsNullOrWhiteSpace(Imie.Text) ||
+      string.IsNullOrWhiteSpace(Nazwisko.Text) ||
+      string.IsNullOrWhiteSpace(Klasa.Text))
+        {
+            await DisplayAlert("B³¹d", "Uzupe³nij wszystkie pola.", "OK");
+            return;
+        }
         _item.ImieNazwiskoKLasa = $"{Imie.Text} {Nazwisko.Text} {Klasa.Text}".Trim();
         await _databaseService.AktualizujFilmAsync(_item);
         await Navigation.PopAsync();

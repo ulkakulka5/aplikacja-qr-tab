@@ -4,7 +4,8 @@
              x:Class="lista_zakupow.SkanerQR"
              Title="SkanerQR"
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls"
-             BackgroundColor="#66717E">
+             BackgroundColor="#66717E"
+             Shell.NavBarIsVisible="False">
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>

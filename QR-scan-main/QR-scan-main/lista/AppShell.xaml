@@ -13,10 +13,13 @@
     <ShellContent
         Title="Lista Zakupów"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="MainPage" 
+         Shell.NavBarIsVisible="False"/>
     <ShellContent
         Title="SkanerQR"
         ContentTemplate="{DataTemplate local:SkanerQR}"
-        Route="SkanerQR" />
+        Route="SkanerQR" 
+         Shell.NavBarIsVisible="False"/>
+    
 
 </Shell>

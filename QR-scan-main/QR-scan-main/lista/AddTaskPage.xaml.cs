@@ -17,7 +17,14 @@ public partial class AddTaskPage : ContentPage
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
- 
+        if (string.IsNullOrWhiteSpace(Imie.Text) ||
+       string.IsNullOrWhiteSpace(Nazwisko.Text) ||
+       string.IsNullOrWhiteSpace(Klasa.Text))
+        {
+            await DisplayAlert("B³¹d", "Uzupe³nij wszystkie pola.", "OK");
+            return;
+        }
+
         if (Products.Count > 0)
         {
             var item = Products[^1];

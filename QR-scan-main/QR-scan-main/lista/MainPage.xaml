@@ -1,8 +1,8 @@
-
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="lista_zakupow.MainPage"
-             BackgroundColor="#66717E">
+             BackgroundColor="#66717E"
+             Shell.NavBarIsVisible="False">
 
     <Grid Margin="5">
         <Grid.RowDefinitions>
@@ -21,7 +21,8 @@
     Grid.Column="2"
     Grid.ColumnSpan="1"
     Grid.RowSpan="3"
-    Margin="0,110,0,0">
+    Margin="0,0,0,0"
+            VerticalOptions="Center">
 
             <Button
         Text="Usuń"
@@ -114,8 +115,8 @@
         Style="{StaticResource listStyle}"
         BackgroundColor="#D9D9D9">
 
-                
-                
+
+
                 <CollectionView.Header>
                     <Grid ColumnDefinitions="*,*,*">
                         <Label
@@ -138,27 +139,45 @@
                             Margin="20,10,0,10" />
                     </Grid>
                 </CollectionView.Header>
-                
+
 
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-
                         <Grid ColumnDefinitions="*,*,*" Padding="10">
-                            <Label
-                                Grid.Column="0"
-                                Text="{Binding NumerUrzadzenia}"
-                                TextColor="Black" />
-                            <Label
-                                Grid.Column="1"
-                                Text="{Binding ImieNazwiskoKLasa}"
-                                TextColor="Black" />
-                            <Label
-                                Grid.Column="2"
-                                Text="{Binding Data, StringFormat='{0:g}'}"
-                                TextColor="Black" />
-                        </Grid>
 
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#D9D9D9" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#D4D6B9" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <Label
+                Grid.Column="0"
+                Text="{Binding NumerUrzadzenia}"
+                TextColor="Black" />
+
+                            <Label
+                Grid.Column="1"
+                Text="{Binding ImieNazwiskoKLasa}"
+                TextColor="Black" />
+
+                            <Label
+                Grid.Column="2"
+                Text="{Binding Data, StringFormat='{0:g}'}"
+                TextColor="Black" />
+
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 
@@ -179,7 +198,7 @@
     
      />
 
-      <Line
+        <Line
 Grid.Row="0"
 Grid.Column="0"
 Grid.RowSpan="3"
